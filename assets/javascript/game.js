@@ -1,54 +1,110 @@
-//game generates a random number
 $(document).ready(function(){
+//Random number is chosen at the start of the game
+//Random number is set between 19-120
+var randomNumber = Math.floor(Math.random() * 101 + 19);    
 
-    $("#random-button").on("click", function(){
-    var randomNumber = Math.floor((Math.random() * 120) + 19);
-    $("#random-number").text(randomNumber);
-  });
+$("#random-number").text(randomNumber);
 
-    //number will change each time the game is loaded
 
-//player presses a random crystal
-$("#crystal-button").on("click", function(){
-    
-    //after the button is pressed a random number will be shown in the score
-    var randomNumber = Math.floor((Math.random() * 12) + 1);
-    $("#crystal-number").text(randomNumber);
-  });
+//This is going to set up the crystal numbers from 1-12
+var jewel1= Math.floor(Math.random()*11+1);
+var jewel2= Math.floor(Math.random()*11+1);
+var jewel3= Math.floor(Math.random()*11+1);
+var jewel4= Math.floor(Math.random()*11+1);
 
-  $("#crystal-button2").on("click", function(){
-    
-    //after the button is pressed a random number will be shown in the score
-    var randomNumber = Math.floor((Math.random() * 12) + 1);
-    $("#crystal-number").text(randomNumber);
-  });
+//These variables are used to track, wins, loses, and current score
+var currentScore= 0;
+var wins= 0;
+var losses=0;
 
-  $("#crystal-button3").on("click", function(){
-    
-    //after the button is pressed a random number will be shown in the score
-    var randomNumber = Math.floor((Math.random() * 12) + 1);
-    $("#crystal-number").text(randomNumber);
-  });
 
-  $("#crystal-button4").on("click", function(){
-    
-    //after the button is pressed a random number will be shown in the score
-    var randomNumber = Math.floor((Math.random() * 12) + 1);
-    $("#crystal-number").text(randomNumber);
-  });
-    //the next number will be pressed
-    //the numbers are added together
-    //the value of all the numbers are displayed in the score
-    //player selects numbers until meeting the win/lose conditions
+$("playerWins").text(wins);
+$("playerLosses").text(losses);
 
-//if the player matches the random number, they win
-    //if the player goes above the random number they lose
-    //if the player is under the chosen number keep playing
+//Resetting the game
+function reset(){
+  Random=Math.floor(Math.random()*101+19);
+  $("#random-number").text(randomNumber);
+  jewel1= Math.floor(Math.random()*11+1);
+  jewel2= Math.floor(Math.random()*11+1);
+  jewel3= Math.floor(Math.random()*11+1);
+  jewel4= Math.floor(Math.random()*11+1);
+  currentScore= 0;
+  $("#finalTotal").text(currentScore);
+  } 
 
-//if player wins add point to wins column
-    //if player loses add point to loses column
 
-//game resets after a win or lose is added to either column
+function winner(){
+  alert("You won!");
+    wins++; 
+    $("#numberWins").text(wins);
+    reset();
+  }
+  //addes the losses to the userTotal
+  function loser(){
+  alert ("You lose!");
+    losses++;
+    $("#numberLosses").text(losses);
+    reset()
+  }
+
+//Click functions for jewels
+
+$("#crystal-1").on ("click", function(){
+  currentScore = currentScore + jewel1;
+  console.log("New currentScore= " + currentScore);
+  $('#finalTotal').text(currentScore); 
+        //sets win/lose conditions
+      if (currentScore == randomNumber){
+        winner();
+      }
+      else if ( currentScore > randomNumber){
+        loser();
+      }   
+
+
+      $("#crystal2").on ("click", function(){
+        currentScore =  currentScore + jewel2;
+        console.log("New  currentScore= " +  currentScore);
+        $('#finalTotal').text( currentScore); 
+            if ( currentScore == randomNumber){
+              winner();
+            }
+            else if (  currentScore > randomNumber){
+              loser();
+            } 
+      })  
+
+
+      $("#crystal-3").on ("click", function(){
+        currentScore =  currentScore + jewel3;
+        console.log("New  currentScore= " +  currentScore);
+        $('#finalTotal').text( currentScore);
+    //sets win/lose conditions
+              if ( currentScore == randomNumber){
+              winner();
+            }
+            else if (  currentScore > randomNumber){
+              loser();
+            } 
+      })  
+
+
+      $("#crystal-4").on ("click", function(){
+         currentScore =  currentScore + jewel4;
+        console.log("New  currentScore= " +  currentScore);
+        $('#finalTotal').text( currentScore); 
+          
+              if ( currentScore == randomNumber){
+              winner();
+            }
+            else if (  currentScore > randomNumber){
+              loser();
+            }
+      });   
+    }); 
+
+
 
 
 
